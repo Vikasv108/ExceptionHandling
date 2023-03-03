@@ -1,0 +1,138 @@
+1. Write a program containing a possible exception. Use a try block to throw it and a catch block 
+to handle it promptly.
+Program:
+import java.util.Scanner;
+public class Exception1 {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner (System.in);
+		System.out.print("Enter positive integer:");
+		int data =scan.nextInt();
+		try {
+			if(data<0){
+				extracted();
+			}
+			System.out.println("You are doing great");
+		}
+		catch(Exception e) {
+			System.out.println("Error: "+ e.getMessage());
+		}
+		scan.close();
+	}
+
+	private static void extracted() throws Exception {
+		throw new Exception("The no. must be positive.");
+	}
+}
+Input: Enter positive integer:-1
+Output:Error: The no. must be positive.
+
+Input: Enter positive integer:8
+Output:You are doing great
+
+2. Write a program that illustrates the application of multiple catch statements.
+Program:
+public class Exception2 {
+
+	public static void main(String[] args) {
+		try{
+	         int a[]=new int[7];
+	         a[4]=30/0;
+	         System.out.println("First print statement in try block");
+	     }
+	     catch(ArithmeticException e){
+	        System.out.println("Warning: ArithmeticException");
+	     }
+	     catch(ArrayIndexOutOfBoundsException e){
+	        System.out.println("Warning: ArrayIndexOutOfBoundsException");
+	     }
+	     catch(Exception e){
+	        System.out.println("Warning: Some Other exception");
+	     }
+	   System.out.println("Out of try-catch block...");
+	}
+}
+Output:	Warning: ArithmeticException
+	Out of try-catch block...
+
+3. Write a program that demonstrates how certain exception types are not allowed to be thrown.
+Program:
+public class Exception3 extends Exception {
+	
+	private static final long serialVersionUID = 1L;
+	public void Excepton3(String m) {
+		super(m);
+	}
+	public static int add(int x,int y)throws Exception{
+		if(x==y) {
+			throw new Exception3("Not allowed");
+		}else {
+			return (x+y);
+		}
+	}
+	public static void main(String[] args) {
+		try {
+			System.out.println(add(8,8));
+		}catch(Exception e){
+			System.out.println(e);
+		}
+	}
+}
+Output:Exception3: Not allowed
+4. Write a program to demonstrate the concept of re-throwing an exception.
+Program:
+public class Exception4 {
+	public static void test1() throws Exception {
+	      System.out.println("The Exception in test1() method");
+	      throw new Exception("thrown from test1() method");
+	   }
+	   public static void test2() throws Throwable {
+	      try {
+	         test1();
+	      } catch(Exception e) {
+	         System.out.println("Inside test2() method");
+	         throw e;
+	      }
+	   }
+	public static void main(String[] args) throws Throwable {
+		try {
+	         test2();
+	      } catch(Exception e) {
+	         System.out.println("Caught in main");
+	      }
+	}
+}
+Output:	The Exception in test1() method
+	Inside test2() method
+	Caught in main
+
+5. You will be given two integers and as input, you have to compute x/y. If x and y are not 32 bit 
+signed integers or if y is zero, exception will occur and you have to report it. Read sample 
+Input/Output to know what to report in case of exceptions. 
+Program:
+import java.util.*;
+
+public class Exception5 {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        try {
+            int x = scan.nextInt();
+            int y = scan.nextInt();
+            System.out.println(x / y);
+        } 
+        catch(InputMismatchException e) {
+            System.out.println(e);
+        }
+        catch(ArithmeticException e) {
+            System.out.println(e);
+        }
+        scan.close();
+    }
+}
+Input: 2 0
+Output:java.lang.ArithmeticException: / by zero
+
+Input: 10 vikas
+Output:java.util.InputMismatchException
